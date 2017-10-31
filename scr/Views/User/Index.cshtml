@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AdminPage.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table id="usersTable" class="table table-striped">
+    <thead>
+        <tr role="row">
+            <th>
+                Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Points
+            </th>
+        </tr>
+    </thead>
+</table>
+<link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+@section scripts{
+    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function (){
+            $('#usersTable').DataTable(
+                {
+                    "ajax": {
+                        "url": "/User/GetUsers",
+                        "type": "GET",
+                        "datatype": "json"
+                    },
+                    "columns": [
+                        { "data": "UserName" },
+                        { "data": "UserEmail" },
+                        { "data": "UserPoints" }
+                    ]
+
+                });
+        });
+
+    </script>
+}
