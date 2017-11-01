@@ -46,56 +46,33 @@ namespace AdminPage.Controllers
             return View("Error");
         }
 
-        // GET: User/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: User/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: User/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
+       
+       
         // GET: User/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public async Task<ActionResult> EditUser(int id)
         {
-            return View();
+            HttpResponseMessage response = await client.GetAsync("api/User/GetUser");
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = response.Content.ReadAsStringAsync().Result;
+
+                var Employee = JsonConvert.DeserializeObject<User>(responseData);
+
+                return View(Employee);
+            }
+            return View("Error");
         }
 
         // POST: User/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        [HttpPost]        
+        public async Task<ActionResult> EditUser(int id, IFormCollection collection)
         {
-            try
-            {
-                // TODO: Add update logic here
+            HttpResponseMessage responseMesssage = await client.PostAsJsonAsync("api/Item/createItemCategory", id);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            responseMesssage.EnsureSuccessStatusCode();
+
+            return RedirectToAction("Categories");
         }
 
         // GET: User/Delete/5
