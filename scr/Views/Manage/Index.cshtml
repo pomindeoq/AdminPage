@@ -1,0 +1,136 @@
+﻿
+@model AdminPage.Models.ManageViewModel
+
+@{
+    ViewData["Title"] = "Manage";
+}
+
+<h2>Manage</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div>
+                <h4>UserInfo</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Username)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Username)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Points)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Points)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+                </dl>
+            </div>
+            <div>
+                @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-2">
+            <h4>ManagePoints</h4>
+            <hr />
+            <form asp-action="ManagePoints">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="input-group">
+                    <span asp-for="Points" class="input-group-addon">Points</span>
+                    <input asp-for="Points" class="form-control" type="text" placeholder="Enter points" />
+                    <span asp-validation-for="Points" class="text-danger"></span>
+                </div>
+                <div class="input-group" style="margin-top:3%">
+                    <span asp-for="Price" class="input-group-addon">Price</span>
+                    <input asp-for="Price" class="form-control" type="text" placeholder="See price here" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group btn-group btn-group-justified" style="margin-top:3%">
+                    <a role="button" class="btn btn-success">Give Points</a>
+                    <a role="button" class="btn btn-success">Buy Points</a>
+                    <a role="button" class="btn btn-danger">Remove Points</a>
+                    <a role="button" disabled="disabled" class="btn btn-success">Pay Digitally</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h4>Check In</h4>
+            <hr />
+            @*<form asp-action="Check-in">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="PointValue" class="control-label"></label>
+                        <input asp-for="PointValue" class="form-control" />
+                        <span asp-validation-for="PointValue" class="text-danger"></span>
+                    </div>
+                </form>*@
+            <form>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div id="field">
+                    <div class="input-group">
+                        <input autocomplete="off" class="form-control" id="field1" name="field1" type="text" placeholder="Enter Point Value" data-items="8" style="" />
+                        <span class="input-group-btn">
+                            <button id="b1" class="btn add-more">+</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group" id="printDiv">
+                    <button id="printBtn" class="btn btn-success btn-block">Add and Print</button>
+                </div>
+            </form>
+            <div>
+                <a asp-action="Index" class="btn btn-primary" style="margin-top:10%">Back</a>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <h4>Printers</h4>
+            <hr />
+            <div id="textDiv">
+                <label for="textTextArea">Label text:</label><br />
+                <input name="textTextArea" class="form-control" id="textTextArea" rows="1" cols="30">
+            </div><br />
+            <div id="printDiv">
+                <button id="printButton">Print</button>
+            </div><br />
+            <div id="printersDiv">
+                <label for="printersSelect">Printer:</label>
+                <select id="printersSelect"></select>
+            </div>
+        </div>
+        <div class="col-md-4 col-md-offset-1">
+            <h4>Checkout</h4>
+            <hr />
+            <form asp-action="Checkout">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="ItemId" class="control-label"></label>
+                    <input asp-for="ItemId" class="form-control" />
+                    <span asp-validation-for="ItemId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PointValue" class="control-label"></label>
+                    <input asp-for="PointValue" class="form-control" />
+                    <span asp-validation-for="PointValue" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Checkout" class="btn btn-danger btn-block" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

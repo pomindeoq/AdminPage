@@ -17,13 +17,7 @@ namespace AdminPage.Controllers
         HttpClient client;
         string url = "http://localhost:54443";
 
-        public UserController()
-        {
-            client = new HttpClient();
-            client.BaseAddress = new Uri(url);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        }
+        
         // GET: User
 
         public ActionResult Index()
@@ -33,7 +27,7 @@ namespace AdminPage.Controllers
 
         public async Task<ActionResult> GetUsers()
         {
-            HttpResponseMessage response = await client.GetAsync("api/User/getUsers");
+            HttpResponseMessage response = await Api.ApiClient.GetAsync("/User/getUsers");
 
             if (response.IsSuccessStatusCode)
             {
@@ -69,7 +63,7 @@ namespace AdminPage.Controllers
         [HttpPost]        
         public async Task<ActionResult> EditUser(int id, IFormCollection collection)
         {
-            HttpResponseMessage responseMesssage = await ApiClient.PostAsync("/Item/createItemCategory", id.ToString());
+            HttpResponseMessage responseMesssage = await ApiClient.PostAsync("/User/EditUser", id.ToString());
 
             responseMesssage.EnsureSuccessStatusCode();
 

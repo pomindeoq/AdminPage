@@ -14,16 +14,9 @@ namespace AdminPage.Controllers
 {
     public class HomeController : Controller
     {
-        HttpClient client;
-        string url = "http://localhost:54443";
+        
        
-        public HomeController()
-        {           
-            client = new HttpClient();
-            client.BaseAddress = new Uri(url);
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        }
+       
         //get users
         public IActionResult Index() { 
                   
@@ -49,11 +42,7 @@ namespace AdminPage.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-        public IActionResult Manage()
-        {
-            return View();           
-        }       
+    
 
     }
 }
