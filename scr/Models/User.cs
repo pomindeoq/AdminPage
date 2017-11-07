@@ -8,6 +8,8 @@ namespace AdminPage.Models
 {
     public class User
     {
+        [JsonProperty("UserId")]
+        public string Id { get; set; }
         [JsonProperty("UserName")]
         public string Name { get; set; }
         [JsonProperty("UserEmail")]
