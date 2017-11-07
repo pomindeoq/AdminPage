@@ -33,3 +33,11 @@
         display: none;
     }
 }
+
+* {
+    .border-radius(0) !important;
+}
+
+.input-group  {
+    margin-top: 20px;
+}
