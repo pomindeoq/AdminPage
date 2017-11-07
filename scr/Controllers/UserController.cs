@@ -60,7 +60,7 @@ namespace AdminPage.Controllers
 
                 var Employee = JsonConvert.DeserializeObject<User>(responseData);
 
-                return View(Employee);
+                return View(new User());
             }
             return View("Error");
         }
@@ -73,7 +73,7 @@ namespace AdminPage.Controllers
 
             responseMesssage.EnsureSuccessStatusCode();
 
-            return RedirectToAction("Categories");
+            return View();
         }
 
         // GET: User/Delete/5
