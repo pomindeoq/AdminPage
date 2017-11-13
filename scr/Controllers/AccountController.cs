@@ -19,7 +19,7 @@ namespace AdminPage.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         public AccountController(UserManager<ApplicationUser> userManager)
         {
-            _userManager = userManager;
+            _userManager = userManager;          
         }
 
         public ActionResult Index()
@@ -52,7 +52,7 @@ namespace AdminPage.Controllers
         {
             HttpResponseMessage httpResponseMessage = await ApiClient.GetAsync("/Account/signOut");
 
-            return RedirectToAction("Login");
+            return RedirectToAction("Login");        
         }
     }
 }

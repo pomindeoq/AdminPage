@@ -4,15 +4,42 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using AdminPage.Models;
+using AdminPage.Api;
+using System.Net.Http;
+using Newtonsoft.Json;
 
 namespace AdminPage.Controllers
 {
     public class ManageController : Controller
     {
-        // GET: Manage
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "User");
+        }
+
+        // GET: Manage
+        [HttpGet, Route("manage/id={id}")]
+        public async Task<ActionResult> Index(string id, ManageViewModel manageViewModel)
+        {
+            HttpResponseMessage httpResponseMessage = await ApiClient.GetAsync("/User/getUser/id=" + id);
+
+            httpResponseMessage.EnsureSuccessStatusCode();
+
+            var userResponse = httpResponseMessage.Content.ReadAsStringAsync().Result;
+
+            var UserInfoResponse = JsonConvert.DeserializeObject<UserResponse>(userResponse);
+
+            if (UserInfoResponse.User == null)
+            {
+                return RedirectToAction("Index", "User");
+            }
+
+            manageViewModel.Username = UserInfoResponse.User.Name;
+
+            manageViewModel.Email = UserInfoResponse.User.Email;        
+
+            return View(manageViewModel);
         }
 
         // GET: Manage/Details/5

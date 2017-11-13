@@ -27,7 +27,7 @@ namespace AdminPage.Controllers
 
         public async Task<ActionResult> GetUsers()
         {
-            HttpResponseMessage response = await Api.ApiClient.GetAsync("/User/getUsers");
+            HttpResponseMessage response = await ApiClient.GetAsync("/User/getUsers");
 
             if (response.IsSuccessStatusCode)
             {

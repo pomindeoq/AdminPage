@@ -8,13 +8,13 @@ namespace AdminPage.Models
 {
     public class User
     {
-        [JsonProperty("UserId")]
+        [JsonProperty("userId")]
         public string Id { get; set; }
-        [JsonProperty("UserName")]
+        [JsonProperty("userName")]
         public string Name { get; set; }
-        [JsonProperty("UserEmail")]
+        [JsonProperty("userEmail")]
         public string Email { get; set; }
-        [JsonProperty("UserPoints")]
+        [JsonProperty("userPoints")]
         public double Points { get; set; }
     }
 }
