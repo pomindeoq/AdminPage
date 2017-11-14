@@ -41,7 +41,7 @@
         <div class="col-md-5 col-md-offset-2">
             <h4>ManagePoints</h4>
             <hr />
-            <form asp-action="ManagePoints">
+            <form asp-controller="Manage" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="input-group">
                     <span asp-for="Points" class="input-group-addon">Points</span>
@@ -53,11 +53,19 @@
                     <input asp-for="Price" class="form-control" type="text" placeholder="See price here" />
                     <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
-                <div class="form-group btn-group btn-group-justified" style="margin-top:3%">
-                    <a role="button" class="btn btn-success">Give Points</a>
-                    <a role="button" class="btn btn-success">Buy Points</a>
-                    <a role="button" class="btn btn-danger">Remove Points</a>
-                    <a role="button" disabled="disabled" class="btn btn-success">Pay Digitally</a>
+                <div class="btn-group btn-group-justified" role="group" style="margin-top:3%">
+                    <div class="btn-group" role="group">
+                        <input asp-action="GivePoints" type="submit" value="Give Points" class="btn btn-success" />
+                    </div>
+                    <div class="btn-group" role="group">
+                        <input asp-action="BuyPoints" type="submit" value="Buy Points" class="btn btn-success" />
+                    </div>
+                    <div class="btn-group" role="group">
+                        <input asp-action="RemovePoints" type="submit" value="Remove Points" class="btn btn-danger" />
+                    </div>
+                    <div class="btn-group" role="group">
+                        <input type="submit" value="Pay Digitally" class="btn btn-success" disabled/>
+                    </div>
                 </div>
             </form>
         </div>
@@ -110,8 +118,18 @@
         <div class="col-md-4 col-md-offset-1">
             <h4>Checkout</h4>
             <hr />
-            <form asp-action="Checkout">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form asp-action="CreateExchange">   
+                <div class="text-danger">
+                    @if (TempData["ExchangeErrors"] != null)
+                    {
+                        <ul>
+                            @foreach (var item in (IEnumerable<string>) TempData["ExchangeErrors"])
+                            {
+                            <li>@item</li>
+                            }
+                        </ul>
+                    }
+                </div>
                 <div class="form-group">
                     <label asp-for="ItemId" class="control-label"></label>
                     <input asp-for="ItemId" class="form-control" />
