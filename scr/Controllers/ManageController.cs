@@ -8,6 +8,7 @@ using AdminPage.Models;
 using AdminPage.Api;
 using System.Net.Http;
 using AdminPage.Models.Items;
+using AdminPage.Models.Manage;
 using Newtonsoft.Json;
 
 namespace AdminPage.Controllers
@@ -61,6 +62,24 @@ namespace AdminPage.Controllers
             TempData["ExchangeErrors"] = itemExchangeResponse.Errors;
 
             return RedirectToAction("Index", new {id = userId});
+        }
+
+        [HttpPost]
+        public ActionResult GivePoints(ManagePointsModel managePointsModel)
+        {
+            string userId = (string)TempData["UserId"];
+
+
+            return RedirectToAction("Index", new { id = userId });
+        }
+
+        [HttpPost]
+        public ActionResult BuyPoints(ManagePointsModel managePointsModel)
+        {
+            string userId = (string)TempData["UserId"];
+
+
+            return RedirectToAction("Index", new { id = userId });
         }
 
         // GET: Manage/Details/5
