@@ -7,7 +7,7 @@ $(document).ready(function () {
         next = next + 1;
         var addto = "#field";
         var addRemove = "#field" + (next);      
-        var newIn = '<div class="input-group"><input autocomplete="off" class="form-control" id="field' + next + '" name="field' + next + '" type="text" >';
+        var newIn = '<div class="input-group" id="newField' + next + '"><input autocomplete="off" class="form-control" id="field' + next + '" name="field' + next + '" type="text" >';
         var newInput = $(newIn);
         var removeBtn = '<span class="input-group-btn"><button id="remove' + (next) + '" class="btn btn-danger remove-me" >-</button></span></div>';
         var removeButton = $(removeBtn);
@@ -20,8 +20,10 @@ $(document).ready(function () {
             e.preventDefault();
             var fieldNum = this.id.charAt(this.id.length -1);
             var fieldID = "#field" + fieldNum;
+            var newFieldID = "#newField" + fieldNum;
             $(this).remove();
             $(fieldID).remove();
+            $(newFieldID).remove();
         });
     });
 
