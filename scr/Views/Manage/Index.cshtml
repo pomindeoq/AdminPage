@@ -110,8 +110,18 @@
         <div class="col-md-4 col-md-offset-1">
             <h4>Checkout</h4>
             <hr />
-            <form asp-action="Checkout">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form asp-action="CreateExchange">   
+                <div class="text-danger">
+                    @if (TempData["ExchangeErrors"] != null)
+                    {
+                        <ul>
+                            @foreach (var item in (IEnumerable<string>) TempData["ExchangeErrors"])
+                            {
+                            <li>@item</li>
+                            }
+                        </ul>
+                    }
+                </div>
                 <div class="form-group">
                     <label asp-for="ItemId" class="control-label"></label>
                     <input asp-for="ItemId" class="form-control" />

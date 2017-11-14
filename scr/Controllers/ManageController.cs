@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using AdminPage.Models;
 using AdminPage.Api;
 using System.Net.Http;
+using AdminPage.Models.Items;
 using Newtonsoft.Json;
 
 namespace AdminPage.Controllers
@@ -28,18 +29,38 @@ namespace AdminPage.Controllers
 
             var userResponse = httpResponseMessage.Content.ReadAsStringAsync().Result;
 
-            var UserInfoResponse = JsonConvert.DeserializeObject<UserResponse>(userResponse);
+            var userInfoResponse = JsonConvert.DeserializeObject<UserResponse>(userResponse);
 
-            if (UserInfoResponse.User == null)
+            if (userInfoResponse.User == null)
             {
                 return RedirectToAction("Index", "User");
             }
 
-            manageViewModel.Username = UserInfoResponse.User.Name;
+            manageViewModel.Username = userInfoResponse.User.Name;
 
-            manageViewModel.Email = UserInfoResponse.User.Email;        
+            manageViewModel.Email = userInfoResponse.User.Email;
+
+            TempData["UserId"] = id;
 
             return View(manageViewModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateExchange(ItemExchangeModel itemExchangeModel)
+        {
+            string userId = (string)TempData["UserId"];
+
+            itemExchangeModel.NewOwnerAccountId = userId;
+            string jsonString = JsonConvert.SerializeObject(itemExchangeModel);
+
+            HttpResponseMessage httpResponseMessage = await ApiClient.PostAsync("/Item/exchangeItem", jsonString);
+            httpResponseMessage.EnsureSuccessStatusCode();
+            string responseResult = httpResponseMessage.Content.ReadAsStringAsync().Result;
+            var itemExchangeResponse = JsonConvert.DeserializeObject<ItemExchangeResponse>(responseResult);
+
+            TempData["ExchangeErrors"] = itemExchangeResponse.Errors;
+
+            return RedirectToAction("Index", new {id = userId});
         }
 
         // GET: Manage/Details/5

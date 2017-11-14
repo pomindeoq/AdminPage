@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AdminPage.Models
+namespace AdminPage.Models.Items
 {
     public class Item
     {
