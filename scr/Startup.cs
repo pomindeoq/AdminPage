@@ -29,7 +29,7 @@ namespace AdminPage
         public void ConfigureServices(IServiceCollection services)
         {
 
-            var sqlConnectionString = "server=164.132.233.40;userid=switchlook;password=teoy3RroLKqqWpm0;database=switchlookDev;";
+            var sqlConnectionString = "server=164.132.233.40;userid=switchlook;password=teoy3RroLKqqWpm0;database=switchlook;";
             services.AddDbContext<DataContext>(options =>
                 options.UseMySql(
                     sqlConnectionString
