@@ -13,11 +13,7 @@ using AdminPage.Models;
 namespace AdminPage.Controllers
 {
     public class UserController : Controller
-    {
-        HttpClient client;
-        string url = "http://localhost:54443";
-
-        
+    {       
         // GET: User
 
         public ActionResult Index()

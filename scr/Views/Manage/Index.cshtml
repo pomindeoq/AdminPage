@@ -42,7 +42,19 @@
             <h4>ManagePoints</h4>
             <hr />
             <form asp-controller="Manage" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                
+                @if (TempData["ManagePointMessage"] != null)
+                {
+                    <div class="text-danger">
+                        <ul>
+                            @foreach (var item in (IEnumerable<string>)TempData["ManagePointMessage"])
+                            {
+                                <li>@item</li>
+                            }
+                        </ul>
+                    </div>
+                }
+                        
                 <div class="input-group">
                     <span asp-for="Points" class="input-group-addon">Points</span>
                     <input asp-for="Points" class="form-control" type="text" placeholder="Enter points" />
@@ -121,17 +133,19 @@
             <h4>Checkout</h4>
             <hr />
             <form asp-action="CreateExchange">   
-                <div class="text-danger">
-                    @if (TempData["ExchangeErrors"] != null)
-                    {
+                
+                @if (TempData["ExchangeErrors"] != null)
+                {
+                    <div class="text-danger">
                         <ul>
-                            @foreach (var item in (IEnumerable<string>) TempData["ExchangeErrors"])
+                            @foreach (var item in (IEnumerable<string>)TempData["ExchangeErrors"])
                             {
-                            <li>@item</li>
+                                <li>@item</li>
                             }
                         </ul>
-                    }
-                </div>
+                    </div>
+                }
+                        
                 <div class="form-group">
                     <label asp-for="ItemId" class="control-label"></label>
                     <input asp-for="ItemId" class="form-control" />
