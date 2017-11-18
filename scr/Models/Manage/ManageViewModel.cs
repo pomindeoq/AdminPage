@@ -14,7 +14,7 @@ namespace AdminPage.Models
             //UserInfo
             public string Username { get; set; }
 
-            public double Points { get; set; }
+            public double UserPoints { get; set; }
 
             public string Email { get; set; }
         
@@ -34,7 +34,7 @@ namespace AdminPage.Models
         
     
             //ManagePoints
-            //public double Points { get; set; }
+            public double Points { get; set; }
 
             public double Price { get; set; }      
        

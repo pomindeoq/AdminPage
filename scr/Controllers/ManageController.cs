@@ -39,8 +39,9 @@ namespace AdminPage.Controllers
             }
 
             manageViewModel.Username = userInfoResponse.User.Name;
-
             manageViewModel.Email = userInfoResponse.User.Email;
+            manageViewModel.UserPoints = userInfoResponse.User.Points;
+
 
             TempData["UserId"] = id;
 
