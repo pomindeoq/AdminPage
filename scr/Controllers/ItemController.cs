@@ -17,12 +17,13 @@ namespace AdminPage.Controllers
         }
 
         
+
         [HttpPost]
-        public ActionResult CreateItems(List<int> items)
+        public ActionResult CreateItems([FromBody] Data data)
         {
 
             
-            foreach (var item in items)
+            foreach (var item in data.Items)
             {
                 Debug.WriteLine(item);
             }
@@ -30,5 +31,10 @@ namespace AdminPage.Controllers
         }
 
        
+    }
+    public class Data
+    {
+        public List<double> Items { get; set; }
+
     }
 }
