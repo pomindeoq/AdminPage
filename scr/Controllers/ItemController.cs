@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using AdminPage.Models.Items;
+using Newtonsoft.Json;
+using System.Net.Http;
+using AdminPage.Api;
 
 namespace AdminPage.Controllers
 {
@@ -19,22 +23,28 @@ namespace AdminPage.Controllers
         
 
         [HttpPost]
-        public ActionResult CreateItems([FromBody] Data data)
+        public async Task<ActionResult> CreateItems([FromBody] ItemsInput itemsInput)
         {
+            string userId = (string)TempData["UserId"];
 
+            CreateItemsModel createItemsModel = new CreateItemsModel();
+
+            createItemsModel.CategoryId = 1;
+            createItemsModel.UserId = userId;
+            createItemsModel.PointValues = itemsInput.Items;
             
-            foreach (var item in data.Items)
-            {
-                Debug.WriteLine(item);
-            }
+            string jsonString = JsonConvert.SerializeObject(createItemsModel);
+
+            HttpResponseMessage responseMessage = await ApiClient.PostAsync("/Item/createItems", jsonString);
+
+            string responseResult = responseMessage.Content.ReadAsStringAsync().Result;
+
+            TempData["UserId"] = userId;
+
             return Ok();
         }
 
        
     }
-    public class Data
-    {
-        public List<double> Items { get; set; }
-
-    }
+    
 }
