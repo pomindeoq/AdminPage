@@ -1,5 +1,4 @@
-﻿// Write your JavaScript code.
-
+﻿
 $(document).ready(function () {
     
     $(".add-more").click(function (e) {
@@ -19,8 +18,31 @@ $(document).ready(function () {
 
     $('#printBtn').click(function (e) {
         e.preventDefault();
-        
+        var items = [];
+        $("form#formID input[type=text]").each(function () {
+            var input = $(this).val();
+            items.push(input);
+        });
+        var data = { items: items }
+        var jsonString = JSON.stringify(data);
+        console.log(jsonString);
+        $.ajax({
+            url: "/Item/CreateItems",
+            data: jsonString,
+            dataType: "json",
+            contentType: 'application/json',
+            type: 'POST',
+            success: function (data) {
+                alert("Successfull");
+            },
+            error: function () {
+                alert("error");
+            }
+        });
     });
+
+    
+
 
 });
 

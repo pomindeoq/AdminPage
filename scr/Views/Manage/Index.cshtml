@@ -94,7 +94,7 @@
                         <span asp-validation-for="PointValue" class="text-danger"></span>
                     </div>
                 </form>*@
-            <form>
+            <form id="formID" class="itemForm">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div id="items">
                     <div id="field">
@@ -107,11 +107,11 @@
                     </div>
                 </div>
                 <div class="form-group" id="printDiv">
-                    <button id="printBtn" class="btn btn-success btn-block">Add and Print</button>
+                    <button id="printBtn" class="btn btn-success btn-block" style="margin-top:5%">Add and Print</button>
                 </div>
             </form>
             <div>
-                <a asp-action="Index" class="btn btn-primary" style="margin-top:10%">Back</a>
+                <a asp-controller="User" asp-action="Index" class="btn btn-primary" style="margin-top:5%">Back</a>
             </div>
         </div>
         <div class="col-md-2">
