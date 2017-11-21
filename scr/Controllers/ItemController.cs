@@ -37,7 +37,9 @@ namespace AdminPage.Controllers
 
             HttpResponseMessage responseMessage = await ApiClient.PostAsync("/Item/createItems", jsonString);
 
-            string responseResult = responseMessage.Content.ReadAsStringAsync().Result;
+            var responseResult = responseMessage.Content.ReadAsStringAsync().Result;
+
+            var response = JsonConvert.DeserializeObject<CreateItemsResponse>(responseResult);
 
             TempData["UserId"] = userId;
 
