@@ -98,12 +98,34 @@ namespace AdminPage.Controllers
         }
 
         [HttpPost]
-        public ActionResult BuyPoints(ManagePointsModel managePointsModel)
+        public async Task<ActionResult> BuyPoints(ManagePointsModel managePointsModel)
         {
             string userId = (string)TempData["UserId"];
 
-            
+            BuyPointsModel buyPointsModel = new BuyPointsModel
+            {
+                UserId = userId,
+                Value = managePointsModel.Points,
+                Price = managePointsModel.Price
+            };
 
+            string jsonString = JsonConvert.SerializeObject(buyPointsModel);
+
+            HttpResponseMessage responseMessage = await ApiClient.PostAsync("/Point/buyPoints", jsonString);
+
+            string responseResult = responseMessage.Content.ReadAsStringAsync().Result;
+            AddPointsResponse addPointsResponse = JsonConvert.DeserializeObject<AddPointsResponse>(responseResult);
+
+            if (addPointsResponse.Succeeded)
+            {
+                string[] message = { "Points purchased successfully." };
+
+                TempData["ManagePointMessage"] = message;
+            }
+            else
+            {
+                TempData["ManagePointMessage"] = addPointsResponse.Errors;
+            }
 
             return RedirectToAction("Index", new { id = userId });
         }

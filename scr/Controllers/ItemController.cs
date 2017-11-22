@@ -34,7 +34,7 @@ namespace AdminPage.Controllers
             createItemsModel.PointValues = itemsInput.Items;
             
             string jsonString = JsonConvert.SerializeObject(createItemsModel);
-
+             
             HttpResponseMessage responseMessage = await ApiClient.PostAsync("/Item/createItems", jsonString);
 
             var responseResult = responseMessage.Content.ReadAsStringAsync().Result;
