@@ -23,7 +23,7 @@ namespace AdminPage.Controllers
         
 
         [HttpPost]
-        public async Task<ActionResult> CreateItems([FromBody] ItemsInput itemsInput)
+        public async Task<IEnumerable<int>> CreateItems([FromBody] ItemsInput itemsInput)
         {
             string userId = (string)TempData["UserId"];
 
@@ -43,7 +43,7 @@ namespace AdminPage.Controllers
 
             TempData["UserId"] = userId;
 
-            return Ok();
+            return response.ItemIds;
         }
 
        

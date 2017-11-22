@@ -116,14 +116,7 @@
         </div>
         <div class="col-md-2">
             <h4>Printers</h4>
-            <hr />
-            <div id="textDiv">
-                <label for="textTextArea">Label text:</label><br />
-                <input name="textTextArea" class="form-control" id="textTextArea" rows="1" cols="30">
-            </div><br />
-            <div id="printDiv">
-                <button id="printButton">Print</button>
-            </div><br />
+            <hr />                        
             <div id="printersDiv">
                 <label for="printersSelect">Printer:</label>
                 <select id="printersSelect"></select>
@@ -148,12 +141,12 @@
                         
                 <div class="form-group">
                     <label asp-for="ItemId" class="control-label"></label>
-                    <input asp-for="ItemId" class="form-control" />
+                    <input asp-for="ItemId" class="form-control" value="" />
                     <span asp-validation-for="ItemId" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="PointValue" class="control-label"></label>
-                    <input asp-for="PointValue" class="form-control" />
+                    <input asp-for="PointValue" class="form-control" value="1" />
                     <span asp-validation-for="PointValue" class="text-danger"></span>
                 </div>
                 <div class="form-group">
