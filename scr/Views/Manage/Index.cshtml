@@ -62,7 +62,7 @@
                 </div>
                 <div class="input-group" style="margin-top:3%">
                     <span asp-for="Price" class="input-group-addon">Price</span>
-                    <input asp-for="Price" class="form-control" type="text" placeholder="See price here" />
+                    <input asp-for="Price" class="form-control" type="text" placeholder="Enter point price" />
                     <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
                 <div class="btn-group btn-group-justified" role="group" style="margin-top:3%">
@@ -141,7 +141,7 @@
                         
                 <div class="form-group">
                     <label asp-for="ItemId" class="control-label"></label>
-                    <input asp-for="ItemId" class="form-control" value="" />
+                    <input asp-for="ItemId" class="form-control" placeholder="Scan item Id" value="" />
                     <span asp-validation-for="ItemId" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -159,5 +159,7 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script src="~/js/DYMO.Label.Framework.latest.js"></script>
+<script src="~/js/PrintLabel.js" asp-append-version="true" type="text/javascript" charset="UTF-8"> </script>
 }
 

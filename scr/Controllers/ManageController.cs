@@ -57,7 +57,7 @@ namespace AdminPage.Controllers
             string jsonString = JsonConvert.SerializeObject(itemExchangeModel);
 
             HttpResponseMessage httpResponseMessage = await ApiClient.PostAsync("/Item/exchangeItem", jsonString);
-            httpResponseMessage.EnsureSuccessStatusCode();
+            httpResponseMessage.EnsureSuccessStatusCode();         
             string responseResult = httpResponseMessage.Content.ReadAsStringAsync().Result;
             var itemExchangeResponse = JsonConvert.DeserializeObject<ItemExchangeResponse>(responseResult);
 
@@ -157,8 +157,7 @@ namespace AdminPage.Controllers
             {
                 TempData["ManagePointMessage"] = addPointsResponse.Errors;
             }
-
-
+       
             return RedirectToAction("Index", new { id = userId });
         }
 

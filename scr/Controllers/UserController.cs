@@ -21,8 +21,10 @@ namespace AdminPage.Controllers
             return View();
         }
 
+        [HttpPost]
         public async Task<ActionResult> GetUsers()
         {
+            
             HttpResponseMessage response = await ApiClient.GetAsync("/User/getUsers");
 
             if (response.IsSuccessStatusCode)
